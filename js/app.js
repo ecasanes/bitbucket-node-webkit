@@ -1,0 +1,1 @@
+bitbucketAPIApp = angular.module('bitbucketAPIApp', ['ngResource', 'ngRoute']);
