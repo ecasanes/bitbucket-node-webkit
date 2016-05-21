@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-ng-app="bitbucketAPIApp">
+
+<head>
+    <title>Bitbucket</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/roboto.min.css">
+    <link rel="stylesheet" type="text/css" href="css/material-fullpalette.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body>
+<div data-ng-include src="getHeaderSrc()" data-ng-controller="pageController"></div>
+<div id="main-content" class="container">
+    <div class="col-xs-12">
+        <div data-ng-view=""></div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="js/lib/angular.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/material/ripples.min.js"></script>
+<script type="text/javascript" src="js/material/material.min.js"></script>
+
+<script type="text/javascript" src="js/app.js"></script>
+
+<script type="text/javascript" src="js/service/authentication-service.js"></script>
+<script type="text/javascript" src="js/service/header-service.js"></script>
+
+<script type="text/javascript" src="js/controller/page-controller.js"></script>
+<script type="text/javascript" src="js/controller/issues-controller.js"></script>
+<script type="text/javascript" src="js/controller/login-controller.js"></script>
+
+<script type="text/javascript" src="js/router/routes.js"></script>
+
+<script type="text/javascript">
+    $.material.init();
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+body {
+    background: #ffffff;
+}
+
+#main-content {
+    margin-top: 100px;
+}
+
+table .btn-action {
+    margin: 0;
+}
+
+table .icon-action {
+    font-size: 12pt !important;
+}
+
+.link-pagination {
+    padding: 0 !important;
+}
+
+.link-pagination .icon-pagination {
+    font-size: 21pt !important;
+}
+
+.icon-title {
+    display: block;
+    margin-left: 30px;
+    margin-top: -26px;
+}
+
+.pagination li {
+    cursor: pointer;
+}
+
+.row-title {
+    margin-top: 10px;
+}
+
+.dropdown-menu {
+    min-width:100px !important;
+}
+
+.navbar-brand {
+    width: 180px;
+}
+
+.navbar-brand .navbar-logo {
+    width:30px;
+    display:inline-block;
+    margin-top:-6px;
+}
+
+ul.dropdown-menu li{
+    cursor:pointer;
+}
+
+#profile-dropdown{
+    cursor: pointer;
+}
+
+#profile-dropdown .profile-img {
+    width:20px;
+    height:20px;
+    border-radius:10px;
+}

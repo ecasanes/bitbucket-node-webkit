@@ -1,0 +1,73 @@
+{
+    "app_name": "Bitbucket API Angular", 
+    "nodejs": true, 
+    "additional_trust_anchors": [
+        ""
+    ], 
+    "private": true, 
+    "inject-js-end": "", 
+    "node-remote": "", 
+    "keywords": [
+        "node", 
+        "webkit", 
+        "win", 
+        "osx"
+    ], 
+    "author": "Arvind Ravulavaru", 
+    "user-agent": "", 
+    "window": {
+        "show": true, 
+        "always-on-top": false, 
+        "frame": true, 
+        "height": 600, 
+        "visible": true, 
+        "as_desktop": false, 
+        "min_width": 1200, 
+        "fullscreen": false, 
+        "title": "Bitbucket API Angular", 
+        "mac_icon": "assets\\img\\icon.png", 
+        "exe_icon": "assets\\img\\icon.png", 
+        "width": 1200, 
+        "resizable": true, 
+        "kiosk": false, 
+        "max_height": 0, 
+        "min_height": 600, 
+        "show_in_taskbar": true, 
+        "transparent": false, 
+        "toolbar": false, 
+        "icon": "assets\\img\\brand.png", 
+        "max_width": 0, 
+        "kiosk_emulation": false, 
+        "position": "center"
+    }, 
+    "version": "0.0.1", 
+    "inject-js-start": "", 
+    "main": "index.html", 
+    "chromium-args": "", 
+    "webexe_settings": {
+        "linux-x32": false, 
+        "export_dir": "output", 
+        "windows-x64": false, 
+        "uncompressed_folder": false, 
+        "download_dir": "C:\\Users\\ErnestOliver\\Downloads\\APPS", 
+        "nw_compression_level": 0, 
+        "mac-x32": false, 
+        "windows-x32": true, 
+        "mac-x64": false, 
+        "nw_version": "0.12.3", 
+        "force_download": false, 
+        "linux-x64": false
+    }, 
+    "description": "An Angular node-webkit application", 
+    "webkit": {
+        "page-cache": true, 
+        "java": false, 
+        "plugin": false
+    }, 
+    "js-flags": "", 
+    "name": "nwk-bitbucket-angular", 
+    "license": "MIT", 
+    "single-instance": true, 
+    "snapshot": "", 
+    "node-main": ""
+}
