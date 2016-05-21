@@ -25,9 +25,6 @@ bitbucketAPIApp.controller("pageController", function ($scope, $location, header
         $location.path('/login');
     };
 
-
-
-
     // route manipulation
     $scope.back = function () {
         window.history.back();

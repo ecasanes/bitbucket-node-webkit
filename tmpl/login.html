@@ -145,24 +145,24 @@
 
         <!--<p class="subhead">by: Ernest</p>-->
 
-        <form class="" role="form" ng-submit="validate()" novalidate>
+        <form class="" role="form" ng-submit="validate(user)" novalidate>
 
-            <div id="form-login-username" class="form-group">
+            <div id="form-login-username" class="form-group" ng-class="{'has-error':!user.username.valid}">
 
                 <label class="control-label" for="password">Username </label>
 
                 <div class="form-control-wrapper">
-                    <input ng-model="username" id="username" type="username" class="form-control empty">
+                    <input ng-model="user.username.value" id="username" type="username" class="form-control empty" ng-change="checkValidity(user.username)" required>
                     <span class="material-input"></span></div>
 
             </div>
 
-            <div id="form-login-password" class="form-group">
+            <div id="form-login-password" class="form-group" ng-class="{'has-error':!user.password.valid}">
 
                 <label class="control-label" for="password">Password </label>
 
                 <div class="form-control-wrapper">
-                    <input ng-model="password" id="password" type="password" class="form-control empty">
+                    <input ng-model="user.password.value" id="password" type="password" class="form-control empty" ng-change="checkValidity(user.password)" required>
                     <span class="material-input"></span></div>
 
             </div>
@@ -172,23 +172,23 @@
                 <label class="control-label" for="team">Team Name </label>
 
                 <div class="form-control-wrapper">
-                    <input ng-model="team" id="team" type="text" class="form-control empty">
+                    <input ng-model="user.team.value" id="team" type="text" class="form-control empty">
                     <span class="material-input"></span></div>
 
             </div>
 
-            <div id="form-login-repository" class="form-group">
+            <div id="form-login-repository" class="form-group" ng-class="{'has-error':!user.repository.valid}">
 
                 <label class="control-label" for="repository">Repository </label>
 
                 <div class="form-control-wrapper">
-                    <input ng-model="repository" id="repository" type="text" class="form-control empty">
+                    <input ng-model="user.repository.value" id="repository" type="text" class="form-control empty" ng-change="checkValidity(user.repository)"  required>
                     <span class="material-input"></span></div>
 
             </div>
 
             <div>
-                <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in">
+                <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" data-ng-disabled="!loginValidity(user)">
                     <i ng-show="isLoggingIn" class="fa fa-circle-o-notch fa-spin"></i>
                     Sign in
                 </button>

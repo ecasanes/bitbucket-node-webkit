@@ -1,29 +1,74 @@
 bitbucketAPIApp.controller("loginController", function ($scope, $http, $routeParams, $location, $route, $templateCache, authentication, header) {
 
+    $scope.valid = false;
     $scope.username = '';
     $scope.password = '';
     $scope.repository = '';
     $scope.team = '';
 
-    $scope.validate = function () {
+    $scope.user = {
+        username: {
+            value: '',
+            valid: false
+        },
+        password: {
+            value: '',
+            valid: false
+        },
+        repository: {
+            value: '',
+            valid: false
+        },
+        team: {
+            value: '',
+            valid: true
+        }
+    };
+
+    $scope.checkValidity = function(item){
+
+        if(item.value == '' || typeof item.value == "undefined"){
+            item.valid = false;
+        }else{
+            item.valid = true;
+        }
+
+    };
+
+    $scope.loginValidity = function(user){
+
+        if(user.username.valid && user.password.valid && user.repository.valid){
+            return true;
+        }else{
+            return false;
+        }
+    };
+
+    $scope.validate = function (user) {
 
         $scope.isLoggingIn = true;
         // just a hack to validate the user
         $http({
             method: 'GET',
-            url: 'https://bitbucket.org/api/2.0/users/' + $scope.username,
+            url: 'https://bitbucket.org/api/2.0/users/' + user.username.value,
             headers: {
-                "Authorization": "Basic " + btoa($scope.username + ":" + $scope.password)
+                "Authorization": "Basic " + btoa(user.username.value + ":" + user.password.value)
             }
         }).then(function successCallback(response) {
 
             // set global variables
-            localStorage.setItem(storage_prefix+'username', $scope.username);
-            localStorage.setItem(storage_prefix+'password', $scope.password);
+            localStorage.setItem(storage_prefix+'username', user.username.value);
+            localStorage.setItem(storage_prefix+'password', user.password.value);
             localStorage.setItem(storage_prefix+'name', response.data.display_name);
             localStorage.setItem(storage_prefix+'avatar', response.data.links.avatar.href);
-            localStorage.setItem(storage_prefix+'repository', $scope.repository);
-            localStorage.setItem(storage_prefix+'team', $scope.team);
+            localStorage.setItem(storage_prefix+'repository', user.repository.value);
+
+            if(user.team.value == '' || typeof user.team.value == "undefined"){
+                localStorage.setItem(storage_prefix+'team', user.username.value);
+            }else{
+                localStorage.setItem(storage_prefix+'team', user.team.value);
+            }
+
 
             console.log(response);
 

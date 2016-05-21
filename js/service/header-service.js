@@ -18,6 +18,7 @@ bitbucketAPIApp.service("header", function generateHeaderSrc($location){
         }
     };
 
+    // initialize
     $scope.checkLocation();
 
 });

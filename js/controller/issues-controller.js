@@ -1,7 +1,10 @@
 bitbucketAPIApp.controller("issueController", function ($scope, $http, $routeParams, $location, authentication, header) {
 
     $scope.issue = {
-        title: ''
+        title: '',
+        metadata: {
+            milestone: ''
+        }
     };
 
     $scope.issues = [{}];
@@ -94,6 +97,55 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
     $scope.currentIssueSearchCriteria = $scope.simpleIssueSearchCriteria[0];
     $scope.currentIssueType = $scope.issueTypes[0];
 
+    $scope.issuesDetail = {
+        limit: 5,
+        start: 5,
+        count: 0,
+        pages: 0,
+        status: $scope.currentIssueStatus.value,
+        currentPage: 1,
+        search: '',
+        kind: null,
+        reported_by: null,
+        responsible: null
+    };
+
+    $scope.loadingHeight = $scope.issuesDetail.limit * 22.5;
+    $scope.notFirstPage = false;
+    $scope.notLastPage = false;
+
+    $scope.milestones = [];
+
+    $scope.getMilestones = function(){
+        $http({
+            method: 'GET',
+            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/milestones',
+            /*params: {
+             limit: 50
+             },*/
+            headers: {
+                "Authorization": "Basic " + btoa(authentication.username + ":" + authentication.password)
+            }
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            var data = response;
+
+            console.log(data);
+            $scope.milestones = data.data;
+
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            console.log(response);
+        });
+    };
+
+    $scope.updateMilestone = function(issue){
+        $scope.issue.metadata.milestone = issue.metadata.milestone;
+         $scope.updateIssue(issue);
+    };
+
     $scope.changeIssueType = function (singleIssueType) {
 
         $scope.currentIssueType = singleIssueType;
@@ -159,25 +211,6 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
         }
     };
 
-    $scope.issuesDetail = {
-        limit: 5,
-        start: 5,
-        count: 0,
-        pages: 0,
-        status: $scope.currentIssueStatus.value,
-        currentPage: 1,
-        search: '',
-        kind: null,
-        reported_by: null,
-        responsible: null
-    };
-
-    $scope.loadingHeight = $scope.issuesDetail.limit * 22.5;
-    $scope.notFirstPage = false;
-    $scope.notLastPage = false;
-
-    $scope.path = $location.path();
-
     $scope.changeCurrentIssueStatus = function (singleStatus) {
 
         $scope.issuesDetail.status = singleStatus.value;
@@ -213,16 +246,17 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
         });
     };
 
-    $scope.updateIssue = function () {
+    $scope.updateIssue = function (issue) {
 
         $http({
             method: 'PUT',
-            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/' + $routeParams.issue_id,
+            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/' + issue.local_id,
             headers: {
                 "Authorization": "Basic " + btoa(authentication.username + ":" + authentication.password)
             },
             data: {
-                title: $scope.issue.title
+                title: issue.title,
+                milestone: issue.metadata.milestone
             }
         }).then(function successCallback(response) {
 
@@ -396,7 +430,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
     // initialize
     authentication.isLoggedIn();
 
-    switch ($scope.path) {
+    switch ($location.path()) {
         case "/issues":
             $scope.regenerateAllIssues(0);
             $scope.getAllUsers();
@@ -411,6 +445,8 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
             $scope.getSingleIssue();
             break;
     }
+
+    $scope.getMilestones();
 
     header.getMyIssues = $scope.getMyIssues;
 

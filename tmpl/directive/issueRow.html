@@ -1,0 +1,20 @@
+<tr ng-repeat="issue in issues">
+    <td>{{ issue.local_id }}</td>
+    <td>{{ issue.title }}</td>
+    <td>{{ issue.reported_by.display_name }}</td>
+    <td>{{ issue.responsible.display_name }}</td>
+    <td>
+        <a href="#/edit-issue/{{ issue.local_id }}" class="btn btn-material-blue-800 btn-xs btn-action"
+           data-toggle="tooltip" data-placement="right" title="" data-original-title="COMMENTS">
+            <i class="mdi-communication-forum icon-action"></i>
+        </a>
+        <a href="#/edit-issue/{{ issue.local_id }}" class="btn btn-success btn-xs btn-action"
+           data-toggle="tooltip" data-placement="right" title="" data-original-title="VIEW">
+            <i class="mdi-action-list icon-action"></i>
+        </a>
+        <a href="#/edit-issue/{{ issue.local_id }}" class="btn btn-info btn-xs btn-action"
+           data-toggle="tooltip" data-placement="right" title="" data-original-title="EDIT">
+            <i class="mdi-editor-mode-edit icon-action"></i>
+        </a>
+    </td>
+</tr>
