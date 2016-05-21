@@ -28,4 +28,5 @@ bitbucketAPIApp.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/login'
         });
+
 });
