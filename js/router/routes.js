@@ -11,8 +11,8 @@ bitbucketAPIApp.config(function ($routeProvider) {
         })
 
         .when('/my-todos', {
-            templateUrl: 'tmpl/myIssues.html',
-            controller: 'issueController'
+            templateUrl: 'tmpl/myTodos.html',
+            controller: 'todosController'
         })
 
         .when('/edit-issue/:issue_id', {

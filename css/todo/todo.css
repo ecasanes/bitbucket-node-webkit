@@ -1,0 +1,19 @@
+input[type="checkbox"]{
+    display:none;
+}
+
+input[type="checkbox"] + span{
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../../assets/img/checkboxes/checkbox-empty.svg) left top no-repeat;
+    cursor:pointer;
+    border:1px solid red;
+}
+
+input[type="checkbox"]:checked + span {
+    background:url(../../assets/img/checkboxes/checkbox-filled.svg) left top no-repeat;
+    background-color:red;
+}
