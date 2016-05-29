@@ -63,17 +63,9 @@ bitbucketAPIApp.controller("loginController", function ($scope, $http, $routePar
             localStorage.setItem(storage_prefix+'avatar', response.data.links.avatar.href);
             localStorage.setItem(storage_prefix+'repository', user.repository.value);
 
-            if(user.team.value == '' || typeof user.team.value == "undefined"){
-                localStorage.setItem(storage_prefix+'team', 'arnlea');
-            }else{
-                localStorage.setItem(storage_prefix+'team', user.team.value);
-            }
+            localStorage.setItem(storage_prefix+'team', user.team.value);
 
-            if(user.repository.value == '' || typeof user.repository.value == "undefined"){
-                localStorage.setItem(storage_prefix+'repository', 'iso14224');
-            }else{
-                localStorage.setItem(storage_prefix+'repository', user.team.value);
-            }
+            localStorage.setItem(storage_prefix+'repository', user.team.value);
 
 
             console.log(response);

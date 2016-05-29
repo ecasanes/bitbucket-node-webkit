@@ -121,7 +121,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
     $scope.getMilestones = function(){
         $http({
             method: 'GET',
-            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/milestones',
+            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.teamRepoPath + '/issues/milestones',
             /*params: {
              limit: 50
              },*/
@@ -226,7 +226,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
 
         $http({
             method: 'GET',
-            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/' + $routeParams.issue_id,
+            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.teamRepoPath + '/issues/' + $routeParams.issue_id,
             /*params: {
              limit: 50
              },*/
@@ -252,7 +252,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
 
         $http({
             method: 'PUT',
-            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues/' + issue.local_id,
+            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.teamRepoPath + '/issues/' + issue.local_id,
             headers: {
                 "Authorization": "Basic " + btoa(authentication.username + ":" + authentication.password)
             },
@@ -273,12 +273,8 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
 
         console.log('get all issues');
         $scope.isLoading = true;
-        var url = 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues';
 
-        if(authentication.repository == '' || typeof authentication.repository == "undefined"){
-            // for testing
-            url = 'https://bitbucket.org/api/1.0/repositories/' + 'arnlea' + '/' + 'iso14224' + '/issues'
-        }
+        var url = 'https://bitbucket.org/api/1.0/repositories/' + authentication.teamRepoPath + '/issues';
 
         $http({
             method: 'GET',
@@ -442,7 +438,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
             $scope.issuesDetail.responsible = [
                 '',
                 authentication.username,
-                'arnlea'
+                authentication.team
             ];
             $scope.simpleIssueSearchCriteria.splice(3, 1);
             $scope.regenerateAllIssues(0);
