@@ -9,13 +9,16 @@
             </button>
             <a class="navbar-brand" href="javascript:void(0)">
                 <img class="navbar-logo" src="assets/img/brand.png" alt="">
-                Bitbucket API
+                Issue Tracker
             </a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <li data-ng-class="{active:isActive('/issues')}">
                     <a href="#/issues">All Issues</a>
+                </li>
+                <li data-ng-class="{active:isActive('/open-issues')}">
+                    <a href="#/open-issues">Open Issues</a>
                 </li>
                 <!--<li><a href="javascript:void(0)">Link</a></li>
                 <li class="dropdown">
@@ -46,13 +49,16 @@
                                 <i class="mdi-action-bookmark"></i>
                                 <span class="icon-title">My Issues</span>
                             </a>
+
+                        </li>
+                        <li>
                             <a ng-click="getMyTodos()" href="javascript:void(0)">
                                 <i class="mdi-action-bookmark"></i>
                                 <span class="icon-title">My Todos</span>
                             </a>
-
                         </li>
-                        <li><a href="javascript:void(0)">
+                        <li>
+                            <a href="#/settings">
                             <i class="mdi-action-settings"></i>
                             <span class="icon-title">Settings</span>
                         </a>

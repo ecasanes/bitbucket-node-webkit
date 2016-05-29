@@ -1,5 +1,7 @@
 bitbucketAPIApp.controller("issueController", function ($scope, $http, $routeParams, $location, authentication, header) {
 
+    $scope.isLoading = false;
+
     $scope.issue = {
         title: '',
         metadata: {
@@ -270,13 +272,17 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
     $scope.getAllIssues = function () {
 
         console.log('get all issues');
+        $scope.isLoading = true;
+        var url = 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues';
 
-        $('.loading').removeClass('hidden');
-        $('#issues-table').addClass('hidden');
+        if(authentication.repository == '' || typeof authentication.repository == "undefined"){
+            // for testing
+            url = 'https://bitbucket.org/api/1.0/repositories/' + 'arnlea' + '/' + 'iso14224' + '/issues'
+        }
 
         $http({
             method: 'GET',
-            url: 'https://bitbucket.org/api/1.0/repositories/' + authentication.team + '/' + authentication.repository + '/issues',
+            url: url,
             params: {
                 limit: $scope.issuesDetail.limit,
                 start: $scope.issuesDetail.start,
@@ -290,30 +296,21 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
                 "Authorization": "Basic " + btoa(authentication.username + ":" + authentication.password)
             }
         }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
+
             var data = response;
 
             console.log(data);
-
 
             $scope.issues = data.data.issues;
 
             $scope.issuesDetail.count = data.data.count;
             $scope.issuesDetail.pages = Math.ceil($scope.issuesDetail.count / $scope.issuesDetail.limit);
 
-            console.log($scope.issuesDetail);
-            //$scope.issues = response.data.issues;
-
-            setTimeout(function () {
-                $('.loading').addClass('hidden');
-                $('#issues-table').removeClass('hidden');
-            }, 100);
+            $scope.isLoading = false;
 
 
         }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+
             console.log(response);
         });
     };
@@ -329,8 +326,7 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
                 "Authorization": "Basic " + btoa(authentication.username + ":" + authentication.password)
             }
         }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
+
             var data = response;
 
             console.log(data);
@@ -339,9 +335,9 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
 
 
         }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            console.log(response);
+
+
+            console.log('something went wrong...', response);
         });
     };
 
@@ -432,23 +428,33 @@ bitbucketAPIApp.controller("issueController", function ($scope, $http, $routePar
 
     switch ($location.path()) {
         case "/issues":
+            $scope.pageTitle = 'All Issues';
             $scope.regenerateAllIssues(0);
-            $scope.getAllUsers();
             break;
         case "/my-issues":
+            $scope.pageTitle = 'My Issues';
             $scope.issuesDetail.responsible = authentication.username;
-            $scope.simpleIssueSearchCriteria.splice(3,1);
+            $scope.simpleIssueSearchCriteria.splice(3, 1);
             $scope.regenerateAllIssues(0);
-            $scope.getAllUsers();
+            break;
+        case "/open-issues":
+            $scope.pageTitle = 'Open Issues';
+            $scope.issuesDetail.responsible = [
+                '',
+                authentication.username,
+                'arnlea'
+            ];
+            $scope.simpleIssueSearchCriteria.splice(3, 1);
+            $scope.regenerateAllIssues(0);
             break;
         case "/edit-issue/" + $routeParams.issue_id:
+            $scope.pageTitle = 'Edit Issue';
             $scope.getSingleIssue();
             break;
     }
 
+    $scope.getAllUsers();
     $scope.getMilestones();
-
-    header.getMyIssues = $scope.getMyIssues;
 
 
 });

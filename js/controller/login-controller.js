@@ -37,7 +37,7 @@ bitbucketAPIApp.controller("loginController", function ($scope, $http, $routePar
 
     $scope.loginValidity = function(user){
 
-        if(user.username.valid && user.password.valid && user.repository.valid){
+        if(user.username.valid && user.password.valid){
             return true;
         }else{
             return false;
@@ -64,9 +64,15 @@ bitbucketAPIApp.controller("loginController", function ($scope, $http, $routePar
             localStorage.setItem(storage_prefix+'repository', user.repository.value);
 
             if(user.team.value == '' || typeof user.team.value == "undefined"){
-                localStorage.setItem(storage_prefix+'team', user.username.value);
+                localStorage.setItem(storage_prefix+'team', 'arnlea');
             }else{
                 localStorage.setItem(storage_prefix+'team', user.team.value);
+            }
+
+            if(user.repository.value == '' || typeof user.repository.value == "undefined"){
+                localStorage.setItem(storage_prefix+'repository', 'iso14224');
+            }else{
+                localStorage.setItem(storage_prefix+'repository', user.team.value);
             }
 
 
@@ -74,7 +80,6 @@ bitbucketAPIApp.controller("loginController", function ($scope, $http, $routePar
 
             authentication.username = localStorage.getItem(storage_prefix+'username');
             authentication.password = localStorage.getItem(storage_prefix+'password');
-            authentication.repository = localStorage.getItem(storage_prefix+'repository');
             authentication.team = localStorage.getItem(storage_prefix+'team');
             authentication.displayName = localStorage.getItem(storage_prefix+'name');
             authentication.avatar = localStorage.getItem(storage_prefix+'avatar');

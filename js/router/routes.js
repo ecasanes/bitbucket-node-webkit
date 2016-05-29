@@ -5,8 +5,13 @@ bitbucketAPIApp.config(function ($routeProvider) {
             controller: 'issueController'
         })
 
+        .when('/open-issues', {
+            templateUrl: 'tmpl/issues.html',
+            controller: 'issueController'
+        })
+
         .when('/my-issues', {
-            templateUrl: 'tmpl/myIssues.html',
+            templateUrl: 'tmpl/issues.html',
             controller: 'issueController'
         })
 
@@ -23,6 +28,11 @@ bitbucketAPIApp.config(function ($routeProvider) {
         .when('/login', {
             templateUrl: 'tmpl/login.html',
             controller: 'loginController'
+        })
+
+        .when('/settings', {
+            templateUrl: 'tmpl/settings.html',
+            controller: 'settingsController'
         })
 
         .otherwise({

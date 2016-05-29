@@ -3,6 +3,7 @@ bitbucketAPIApp.controller("pageController", function ($scope, $location, header
     $scope.headerSrc = header.src;
     $scope.displayName = localStorage.getItem(storage_prefix+'name');
     $scope.avatar = localStorage.getItem(storage_prefix+'avatar');
+    $scope.pageTitle = '';
 
     $scope.getHeaderSrc = function() {
         return header.src;
